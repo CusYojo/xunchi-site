@@ -1,0 +1,119 @@
+.page-header {
+    background-color: var(--color-primary-light);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.products-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-bottom: 4rem;
+}
+
+.products-sidebar {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+}
+
+.products-sidebar h3 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.products-sidebar ul li {
+    margin-bottom: 0.5rem;
+}
+
+.products-sidebar button {
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+    color: var(--color-text-main);
+    cursor: pointer;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.products-sidebar button:hover,
+.products-sidebar button.active {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.product-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-details {
+    padding: 1.5rem;
+}
+
+.product-details h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-desc {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.product-specs {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #475569;
+    margin-bottom: 1.5rem;
+    background: #f1f5f9;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .products-layout {
+        grid-template-columns: 250px 1fr;
+    }
+}

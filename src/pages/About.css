@@ -1,0 +1,89 @@
+.about-hero {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+    background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://placehold.co/1920x600/1e293b/FFF?text=About+Us');
+    background-size: cover;
+    background-position: center;
+}
+
+.about-hero h1 {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.about-hero p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+.about-intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.intro-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+}
+
+.intro-text p {
+    margin-bottom: 1.25rem;
+    color: var(--color-text-main);
+    line-height: 1.8;
+}
+
+.intro-text .lead {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.intro-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.features-section {
+    background-color: var(--color-background-alt);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.feature-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.feature-item p {
+    color: var(--color-text-light);
+}
+
+@media (min-width: 768px) {
+    .about-intro {
+        grid-template-columns: 1fr 1fr;
+    }
+}
