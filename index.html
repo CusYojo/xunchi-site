@@ -1,22 +1,27 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Xunchi Textiles | Product Catalog</title>
-  <meta name="description" content="Xunchi Textiles — trusted professional, superior quality. Product catalog and company profile." />
+  <meta name="description"
+    content="Xunchi Textiles — trusted professional, superior quality. Product catalog and company profile." />
   <link rel="preload" as="image" href="assets/img/cover.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
+
 <body>
   <div class="bg-noise" aria-hidden="true"></div>
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Xunchi Textiles home">
-      <span class="brand-mark">XC</span>
+      <img src="assets/img/logo.png" alt="XC" class="brand-logo" />
       <span class="brand-text">
         <strong>Xunchi Textiles</strong>
         <small>Trusted • Professional • Superior Quality</small>
@@ -42,7 +47,7 @@
 
       <div class="container hero-content">
         <p class="kicker reveal">毛毯专家 · 值得信赖</p>
-        <h1 class="reveal">Premium Home Textile<br/>Catalog & Company Profile</h1>
+        <h1 class="reveal">Xunchi Textiles<br />Premium Catalog & Profile</h1>
         <p class="lead reveal">
           A clean, fast, and elegant static site — perfect for sharing your latest catalog with customers worldwide.
         </p>
@@ -61,31 +66,54 @@
     </section>
 
     <section id="about" class="section">
-      <div class="container split">
-        <div class="split-text">
-          <h2 class="section-title reveal">Company Introduction</h2>
-          <p class="section-subtitle reveal">
-            Shaoxing Xunchi Textiles Co., Ltd — home textile manufacturer focused on various knitted fabrics and blankets.
-          </p>
-
-          <div class="pill-row reveal">
-            <span class="pill">Blankets</span>
-            <span class="pill">Knit Fabric</span>
-            <span class="pill">OEM/ODM</span>
-            <span class="pill">Fast Sampling</span>
-          </div>
-
-          <p class="reveal muted">
-            Share this site as a lightweight online brochure. Customers can open pages instantly, zoom in, and download.
-          </p>
-
-          <a class="text-link reveal" href="#catalog">Jump to catalog →</a>
+      <div class="container vertical-intro">
+        <!-- Top Header Line -->
+        <div class="vertical-head reveal">
+          <div class="vertical-label">公司简介 <span>Company Introduction</span></div>
         </div>
 
-        <figure class="split-media reveal">
-          <img src="assets/img/company-intro.png" alt="Company introduction brochure page" loading="lazy" />
-          <figcaption>Company profile page</figcaption>
+        <!-- Main Big Title -->
+        <h2 class="vertical-title reveal">
+          Shaoxing Xunchi<br />Textiles Co., Ltd
+        </h2>
+
+        <!-- Text Columns -->
+        <div class="vertical-columns reveal">
+          <!-- English Column (Left) -->
+          <div>
+            <p>
+              <strong>Shaoxing Xunchi Textiles Co., Ltd</strong> is a home textiles manufacturer founded in 2010,
+              specialized in various knit fabrics and blankets (fleece, polar fleece, coral fleece, flannel, picnic, and
+              double-sided blankets), cushions, bedding, and other home textile products.
+            </p>
+            <p>
+              Also, our products have <strong>OEKO-TEX Standard 100</strong>. The factory located in Shaoxing City,
+              Zhejiang Province, China, which is near Ningbo Port and Shanghai Port. Our factory is audited by
+              <strong>BSCI</strong>. With more than 14 years of development, we have our own fabric weaving workshop,
+              dyeing workshop and ready-made workshop. Warmly welcome you to audit our factory.
+            </p>
+          </div>
+
+          <!-- Chinese Column (Right) -->
+          <div>
+            <p>
+              绍兴迅驰纺织品有限公司是一家成立于2010年的家纺制造商，专注于各种针织面料、多种毯子（例如双面绒、摇粒绒、珊瑚绒、法兰绒、野餐垫等）、件套和其他相关家纺产品。
+            </p>
+            <p>
+              产品通过 OEKO-TEX STANDARD 100 认证。工厂坐落于中国浙江绍兴，靠近宁波港和上海港。我们所有的产品都遵照国际质量标准，深受全球众多不同市场的喜爱。我们工厂也通过了 BSCI
+              验厂认证。经过十四年的发展，我们有自己的坯布、染色和成品制作车间，欢迎大家前来参观。
+            </p>
+          </div>
+        </div>
+
+        <!-- Full Width Image -->
+        <figure class="vertical-media reveal">
+          <img src="assets/img/factory.png" alt="Xunchi Textiles Factory Building" loading="lazy" />
         </figure>
+
+        <!-- Pills/Links can be moved to bottom or removed if not in design. The design image allows for pillars/chips? 
+             The image didn't show chips, but they are useful. I'll keep them below the text but before image, or just remove if it's strictly the image layout. 
+             The prompt says "Make it *like* this top-bottom layout". I will keep the clean look. -->
       </div>
     </section>
 
@@ -160,7 +188,8 @@
         <div class="contact-note reveal">
           <h3>Tip</h3>
           <p>
-            For best speed: compress photos to ~300–900KB each (WebP recommended). This site is designed to stay fast even with many images.
+            For best speed: compress photos to ~300–900KB each (WebP recommended). This site is designed to stay fast
+            even with many images.
           </p>
           <p class="muted">
             Deploy with Cloudflare Pages (Framework: None, Build: empty, Output: /).
@@ -198,17 +227,18 @@
 
   <script>
     window.__GALLERY__ = [
-      {"src":"assets/img/cover.png","title":"Cover"},
-      {"src":"assets/img/company-intro.png","title":"Company Introduction"},
-      {"src":"assets/img/workshop.png","title":"Workshop Profile"},
-      {"src":"assets/img/catalog-01.png","title":"Catalog Page 1"},
-      {"src":"assets/img/catalog-02.png","title":"Catalog Page 2"},
-      {"src":"assets/img/catalog-03.png","title":"Catalog Page 3"},
-      {"src":"assets/img/catalog-04.png","title":"Catalog Page 4"},
-      {"src":"assets/img/catalog-05.png","title":"Catalog Page 5"},
-      {"src":"assets/img/catalog-06.png","title":"Catalog Page 6"}
+      { "src": "assets/img/cover.png", "title": "Cover" },
+      { "src": "assets/img/company-intro.png", "title": "Company Introduction" },
+      { "src": "assets/img/workshop.png", "title": "Workshop Profile" },
+      { "src": "assets/img/catalog-01.png", "title": "Catalog Page 1" },
+      { "src": "assets/img/catalog-02.png", "title": "Catalog Page 2" },
+      { "src": "assets/img/catalog-03.png", "title": "Catalog Page 3" },
+      { "src": "assets/img/catalog-04.png", "title": "Catalog Page 4" },
+      { "src": "assets/img/catalog-05.png", "title": "Catalog Page 5" },
+      { "src": "assets/img/catalog-06.png", "title": "Catalog Page 6" }
     ];
   </script>
   <script src="script.js"></script>
 </body>
+
 </html>
