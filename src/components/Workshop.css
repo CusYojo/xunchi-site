@@ -1,0 +1,17 @@
+.workshop-section {
+    padding: var(--spacing-section) 0;
+    background-color: var(--bg-off-white);
+}
+
+.workshop-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #666;
+}
+
+.workshop-collage {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
