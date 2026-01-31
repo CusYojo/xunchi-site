@@ -1,13 +1,214 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xctextile</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xunchi Textiles | Product Catalog</title>
+  <meta name="description" content="Xunchi Textiles — trusted professional, superior quality. Product catalog and company profile." />
+  <link rel="preload" as="image" href="assets/img/cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Xunchi Textiles home">
+      <span class="brand-mark">XC</span>
+      <span class="brand-text">
+        <strong>Xunchi Textiles</strong>
+        <small>Trusted • Professional • Superior Quality</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#workshop">Workshop</a>
+      <a href="#catalog">Catalog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media" role="img" aria-label="Xunchi Textiles catalog cover"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <p class="kicker reveal">毛毯专家 · 值得信赖</p>
+        <h1 class="reveal">Premium Home Textile<br/>Catalog & Company Profile</h1>
+        <p class="lead reveal">
+          A clean, fast, and elegant static site — perfect for sharing your latest catalog with customers worldwide.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" href="#catalog">View Catalog</a>
+          <a class="btn btn-ghost" href="#contact">Request a Quote</a>
+        </div>
+
+        <div class="hero-stats reveal" aria-label="Highlights">
+          <div class="stat"><span class="stat-num">2010</span><span class="stat-label">Founded</span></div>
+          <div class="stat"><span class="stat-num">OEKO-TEX</span><span class="stat-label">Standard 100</span></div>
+          <div class="stat"><span class="stat-num">BSCI</span><span class="stat-label">Audited</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container split">
+        <div class="split-text">
+          <h2 class="section-title reveal">Company Introduction</h2>
+          <p class="section-subtitle reveal">
+            Shaoxing Xunchi Textiles Co., Ltd — home textile manufacturer focused on various knitted fabrics and blankets.
+          </p>
+
+          <div class="pill-row reveal">
+            <span class="pill">Blankets</span>
+            <span class="pill">Knit Fabric</span>
+            <span class="pill">OEM/ODM</span>
+            <span class="pill">Fast Sampling</span>
+          </div>
+
+          <p class="reveal muted">
+            Share this site as a lightweight online brochure. Customers can open pages instantly, zoom in, and download.
+          </p>
+
+          <a class="text-link reveal" href="#catalog">Jump to catalog →</a>
+        </div>
+
+        <figure class="split-media reveal">
+          <img src="assets/img/company-intro.png" alt="Company introduction brochure page" loading="lazy" />
+          <figcaption>Company profile page</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="workshop" class="section section-alt">
+      <div class="container split split-reverse">
+        <div class="split-text">
+          <h2 class="section-title reveal">Workshop Profile</h2>
+          <p class="section-subtitle reveal">
+            Production scenes, packing, compressing and finished goods — a quick glance at our workflow.
+          </p>
+
+          <ul class="feature-list reveal">
+            <li><span>01</span> Quality-focused production & inspection</li>
+            <li><span>02</span> Flexible packaging & labeling options</li>
+            <li><span>03</span> Stable lead time with reliable shipping</li>
+          </ul>
+
+          <a class="btn btn-primary reveal" href="#contact">Get in touch</a>
+        </div>
+
+        <figure class="split-media reveal">
+          <img src="assets/img/workshop.png" alt="Workshop profile brochure page" loading="lazy" />
+          <figcaption>Workshop overview</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="catalog" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title reveal">Product Catalog</h2>
+            <p class="section-subtitle reveal">
+              Click any page to open a smooth, zoomable lightbox. Use ← → or swipe to navigate.
+            </p>
+          </div>
+          <div class="actions reveal">
+            <button class="chip is-active" data-filter="all">All</button>
+            <button class="chip" data-filter="catalog">Catalog</button>
+            <button class="chip" data-filter="profile">Profile</button>
+          </div>
+        </div>
+
+        <div class="grid" id="grid" aria-label="Catalog gallery"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-alt">
+      <div class="container contact">
+        <div>
+          <h2 class="section-title reveal">Contact</h2>
+          <p class="section-subtitle reveal">
+            Replace the details below with your latest email / WhatsApp / WeChat.
+          </p>
+
+          <div class="contact-cards reveal">
+            <a class="card" href="mailto:info@xunchitextiles.com">
+              <strong>Email</strong>
+              <span>info@xunchitextiles.com</span>
+            </a>
+            <a class="card" href="#" onclick="return false;">
+              <strong>Phone</strong>
+              <span>+86 (your number)</span>
+            </a>
+            <a class="card" href="#" onclick="return false;">
+              <strong>Address</strong>
+              <span>Shaoxing, Zhejiang, China</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-note reveal">
+          <h3>Tip</h3>
+          <p>
+            For best speed: compress photos to ~300–900KB each (WebP recommended). This site is designed to stay fast even with many images.
+          </p>
+          <p class="muted">
+            Deploy with Cloudflare Pages (Framework: None, Build: empty, Output: /).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> Xunchi Textiles</span>
+        <a class="text-link" href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="lightbox-backdrop" data-close></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" aria-label="Close" data-close>✕</button>
+      <button class="lightbox-nav prev" aria-label="Previous" data-prev>‹</button>
+      <button class="lightbox-nav next" aria-label="Next" data-next>›</button>
+
+      <figure class="lightbox-figure">
+        <img id="lightbox-img" alt="" />
+        <figcaption id="lightbox-cap"></figcaption>
+      </figure>
+      <div class="lightbox-actions">
+        <a id="download" class="btn btn-ghost" download>Download</a>
+        <button id="zoom" class="btn btn-primary" type="button">Zoom</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__GALLERY__ = [
+      {"src":"assets/img/cover.png","title":"Cover"},
+      {"src":"assets/img/company-intro.png","title":"Company Introduction"},
+      {"src":"assets/img/workshop.png","title":"Workshop Profile"},
+      {"src":"assets/img/catalog-01.png","title":"Catalog Page 1"},
+      {"src":"assets/img/catalog-02.png","title":"Catalog Page 2"},
+      {"src":"assets/img/catalog-03.png","title":"Catalog Page 3"},
+      {"src":"assets/img/catalog-04.png","title":"Catalog Page 4"},
+      {"src":"assets/img/catalog-05.png","title":"Catalog Page 5"},
+      {"src":"assets/img/catalog-06.png","title":"Catalog Page 6"}
+    ];
+  </script>
+  <script src="script.js"></script>
+</body>
 </html>
