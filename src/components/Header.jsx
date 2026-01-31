@@ -60,9 +60,7 @@ const Header = () => {
           </nav>
 
           <div className="header-actions">
-            <Link to="/rfq" className="btn btn-primary rfq-btn">
-              Request a Quote
-            </Link>
+
             <button className="mobile-menu-btn" onClick={toggleMenu}>
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -83,13 +81,7 @@ const Header = () => {
               {item.name}
             </Link>
           ))}
-          <Link
-            to="/rfq"
-            className="mobile-nav-link rfq-mobile"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Request a Quote
-          </Link>
+
         </nav>
       )}
     </header>

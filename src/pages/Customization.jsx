@@ -69,7 +69,7 @@ const Customization = () => {
                         </div>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                        <Link to="/rfq" className="btn btn-primary">Start Your Custom Order</Link>
+
                     </div>
                 </div>
             </div>

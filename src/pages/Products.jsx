@@ -70,7 +70,7 @@ const Products = () => {
                                             <span><strong>GSM:</strong> {product.gsm}</span>
                                             <span><strong>Width:</strong> {product.width}</span>
                                         </div>
-                                        <Link to="/rfq" className="btn btn-outline btn-sm">Inquire Now</Link>
+
                                     </div>
                                 </div>
                             ))}
