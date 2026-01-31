@@ -150,10 +150,17 @@
               Click any page to open a smooth, zoomable lightbox. Use ← → or swipe to navigate.
             </p>
           </div>
-          <div class="actions reveal">
+          <div class="actions reveal" style="flex-wrap: wrap; gap: 8px;">
             <button class="chip is-active" data-filter="all">All</button>
-            <button class="chip" data-filter="catalog">Catalog</button>
-            <button class="chip" data-filter="profile">Profile</button>
+            <button class="chip" data-filter="double-ply">Double Ply Blanket 双层毯</button>
+            <button class="chip" data-filter="sherpa">Sherpa Blanket 舒棉绒毯</button>
+            <button class="chip" data-filter="flannel">Flannel Blanket 法兰绒毯</button>
+            <button class="chip" data-filter="coral-fleece">Coral Fleece Blanket 珊瑚绒毯</button>
+            <button class="chip" data-filter="digital-printing">Digital Printing Blanket 数码毯</button>
+            <button class="chip" data-filter="polar-fleece">Polar Fleece Blanket 摇粒绒毯</button>
+            <button class="chip" data-filter="fleece">Fleece blanket 双棉绒毯</button>
+            <button class="chip" data-filter="picnic">Picnic Blanket 野餐垫</button>
+            <button class="chip" data-filter="others">Others 其他</button>
           </div>
         </div>
 
@@ -227,15 +234,16 @@
 
   <script>
     window.__GALLERY__ = [
-      { "src": "assets/img/cover.png", "title": "Cover" },
-      { "src": "assets/img/company-intro.png", "title": "Company Introduction" },
-      { "src": "assets/img/workshop.png", "title": "Workshop Profile" },
-      { "src": "assets/img/catalog-01.png", "title": "Catalog Page 1" },
-      { "src": "assets/img/catalog-02.png", "title": "Catalog Page 2" },
-      { "src": "assets/img/catalog-03.png", "title": "Catalog Page 3" },
-      { "src": "assets/img/catalog-04.png", "title": "Catalog Page 4" },
-      { "src": "assets/img/catalog-05.png", "title": "Catalog Page 5" },
-      { "src": "assets/img/catalog-06.png", "title": "Catalog Page 6" }
+      { "src": "assets/img/catalog-01.png", "title": "Double Ply Sample", "category": "double-ply" },
+      { "src": "assets/img/catalog-02.png", "title": "Sherpa Sample", "category": "sherpa" },
+      { "src": "assets/img/catalog-03.png", "title": "Flannel Sample", "category": "flannel" },
+      { "src": "assets/img/catalog-04.png", "title": "Coral Fleece Sample", "category": "coral-fleece" },
+      { "src": "assets/img/catalog-05.png", "title": "Digital Printing Sample", "category": "digital-printing" },
+      { "src": "assets/img/catalog-06.png", "title": "Polar Fleece Sample", "category": "polar-fleece" },
+      // Reuse images for other categories to demonstrate filtering
+      { "src": "assets/img/catalog-01.png", "title": "Fleece Sample", "category": "fleece" },
+      { "src": "assets/img/catalog-02.png", "title": "Picnic Sample", "category": "picnic" },
+      { "src": "assets/img/catalog-03.png", "title": "Other Sample", "category": "others" }
     ];
   </script>
   <script src="script.js"></script>

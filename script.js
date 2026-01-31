@@ -3,9 +3,15 @@
   const grid = document.getElementById('grid');
 
   const classify = (item) => {
-    const s = (item.src || '').toLowerCase();
-    if (s.includes('cover') || s.includes('company') || s.includes('workshop')) return 'profile';
-    return 'catalog';
+    return item.category || 'others';
+  };
+
+  const getCategoryLabel = (cat) => {
+    // Optional: Map short keys to nicer labels for the badge, or just return the key
+    // For now, let's just capitalize/format or return a generic "Product"
+    // or return the category name if it's short enough.
+    // Given the long names, maybe just "Blanket"?
+    return 'Blanket';
   };
 
   const buildTiles = (items) => {
@@ -19,7 +25,7 @@
       el.setAttribute('data-type', type);
 
       el.innerHTML = `
-        <span class="badge">${type === 'catalog' ? 'Catalog' : 'Profile'}</span>
+        <span class="badge">${getCategoryLabel(type)}</span>
         <img src="${item.src}" alt="${item.title || 'Catalog page'}" loading="lazy" />
         <div class="meta">
           <strong>${item.title || 'Page'}</strong>
@@ -94,22 +100,23 @@
   let x0 = null;
   lbImg.addEventListener('touchstart', (e) => {
     x0 = e.touches?.[0]?.clientX ?? null;
-  }, {passive:true});
+  }, { passive: true });
   lbImg.addEventListener('touchend', (e) => {
     const x1 = e.changedTouches?.[0]?.clientX ?? null;
     if (x0 == null || x1 == null) return;
     const dx = x1 - x0;
     if (Math.abs(dx) > 40) (dx > 0 ? prev : next)();
     x0 = null;
-  }, {passive:true});
+  }, { passive: true });
 
   // ----- Filters -----
   const chips = Array.from(document.querySelectorAll('.chip'));
   const applyFilter = (mode) => {
     chips.forEach(c => c.classList.toggle('is-active', c.dataset.filter === mode));
     let items = gallery;
-    if (mode === 'catalog') items = gallery.filter(g => classify(g) === 'catalog');
-    if (mode === 'profile') items = gallery.filter(g => classify(g) === 'profile');
+    if (mode !== 'all') {
+      items = gallery.filter(g => classify(g) === mode);
+    }
     buildTiles(items);
   };
   chips.forEach(c => c.addEventListener('click', () => applyFilter(c.dataset.filter)));
@@ -123,7 +130,7 @@
       entries.forEach(en => {
         if (en.isIntersecting) en.target.classList.add('is-in');
       });
-    }, {threshold: 0.12, rootMargin: '0px 0px -10% 0px'});
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
     els.forEach(el => io.observe(el));
   };
 
