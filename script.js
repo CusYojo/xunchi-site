@@ -152,4 +152,59 @@
   // init
   buildTiles(gallery);
   revealObserve();
+  // ----- Copy to clipboard (Robust) -----
+  const copyText = (text, btn) => {
+    const originalIcon = btn.innerHTML;
+    const showSuccess = () => {
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerHTML = originalIcon;
+        btn.classList.remove('copied');
+      }, 2000);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showSuccess).catch(err => {
+        console.error('Async copy failed', err);
+        fallbackCopy(text, btn, showSuccess);
+      });
+    } else {
+      fallbackCopy(text, btn, showSuccess);
+    }
+  };
+
+  const fallbackCopy = (text, btn, onSuccess) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) onSuccess();
+      else console.error('Fallback copy unsuccessful');
+    } catch (err) {
+      console.error('Fallback copy failed', err);
+    }
+
+    document.body.removeChild(textArea);
+  };
+
+  document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation(); // Stop bubbling
+      const textToCopy = btn.getAttribute('data-copy');
+      if (textToCopy) copyText(textToCopy, btn);
+    });
+  });
 })();
