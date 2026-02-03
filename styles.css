@@ -269,7 +269,7 @@ img {
   /* Bigger lead text */
   color: var(--text-light);
   line-height: 1.6;
-  max-width: 680px;
+  max-width: 840px;
   margin-bottom: 46px;
   font-weight: 400;
 }
