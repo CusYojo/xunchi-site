@@ -40,8 +40,8 @@
 
     <nav class="nav">
       <a href="#about">About</a>
-      <a href="#factory">Factory</a>
-      <a href="#catalog">Catalog</a>
+      <a href="factory.html">Factory</a>
+      <a href="products.html">Catalog</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -60,12 +60,12 @@
         <h1 class="reveal">Xunchi Textiles<br /><span class="hero-subtitle">Trusted • Professional • Superior
             Quality</span></h1>
         <p class="lead reveal">
-          A professional home textile manufacturer specializing in blankets,<br />
-          offering reliable OEM & ODM solutions for global customers.
+          A professional home textile manufacturer specializing in blankets, offering reliable OEM & ODM
+          solutions for global customers.
         </p>
 
         <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="#catalog">View Catalog</a>
+          <a class="btn btn-primary" href="products.html">View Catalog</a>
           <a class="btn btn-ghost" href="#contact">Request a Quote</a>
         </div>
 
@@ -208,6 +208,9 @@
               Production scenes, packing, compressing and finished goods — a quick glance at our workflow.
             </p>
           </div>
+          <div class="actions reveal">
+            <a class="btn btn-primary" href="factory.html">View Full Profile</a>
+          </div>
         </div>
 
         <ul class="feature-list reveal"
@@ -217,6 +220,7 @@
           <li><span>03</span> Stable lead time with reliable shipping</li>
         </ul>
 
+        <!-- Limit items for showcase -->
         <div class="grid reveal">
           <div class="tile"><img src="assets/img/factory/img_fac0.jpg" alt="Factory Scene" loading="lazy" /></div>
           <div class="tile"><img src="assets/img/factory/img_fac1.jpg" alt="Factory Scene" loading="lazy" /></div>
@@ -224,16 +228,34 @@
           <div class="tile"><img src="assets/img/factory/img_fac3.jpg" alt="Factory Scene" loading="lazy" /></div>
           <div class="tile"><img src="assets/img/factory/img_fac4.jpg" alt="Factory Scene" loading="lazy" /></div>
           <div class="tile"><img src="assets/img/factory/img_fac6.jpg" alt="Factory Scene" loading="lazy" /></div>
-          <div class="tile"><img src="assets/img/factory/img_fac7.jpg" alt="Factory Scene" loading="lazy" /></div>
-          <div class="tile"><img src="assets/img/factory/img_fac8.jpg" alt="Factory Scene" loading="lazy" /></div>
-          <div class="tile"><img src="assets/img/factory/img_fac9.jpg" alt="Factory Scene" loading="lazy" /></div>
-          <div class="tile"><img src="assets/img/factory/img_fac91.jpg" alt="Factory Scene" loading="lazy" /></div>
-          <div class="tile"><img src="assets/img/factory/img_fac92.jpg" alt="Factory Scene" loading="lazy" /></div>
-          <div class="tile"><img src="assets/img/factory/img_fac93.jpg" alt="Factory Scene" loading="lazy" /></div>
         </div>
 
         <div style="margin-top: 30px; text-align: center;">
-          <a class="btn btn-primary reveal" href="#contact">Get in touch</a>
+          <a class="btn btn-primary reveal" href="factory.html">View More</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates" class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="section-title reveal" style="text-align: center;">CERTIFICATE DISPLAY</h2>
+        <p class="section-subtitle reveal" style="margin: 0 auto 30px; max-width: 800px; text-align: center;">
+          Xunchi holds the most comprehensive range of certifications and has extensive experience in client
+          collaboration.
+          We are fully equipped to meet diverse needs effectively and efficiently, ensuring high standards of service
+          and
+          satisfaction.
+        </p>
+        <a href="#contact"
+          style="display: inline-block; margin-bottom: 50px; text-decoration: underline; text-underline-offset: 4px; font-weight: 600;"
+          class="reveal">MORE>>></a>
+
+        <div class="cert-grid reveal">
+          <div class="cert-item"><img src="assets/img/cert_placeholder.png" alt="Certificate 1" loading="lazy"></div>
+          <div class="cert-item"><img src="assets/img/cert_placeholder.png" alt="Certificate 2" loading="lazy"></div>
+          <div class="cert-item"><img src="assets/img/cert_placeholder.png" alt="Certificate 3" loading="lazy"></div>
+          <div class="cert-item"><img src="assets/img/cert_placeholder.png" alt="Certificate 4" loading="lazy"></div>
+          <div class="cert-item"><img src="assets/img/cert_placeholder.png" alt="Certificate 5" loading="lazy"></div>
         </div>
       </div>
     </section>
@@ -242,26 +264,22 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2 class="section-title reveal">Product Catalog</h2>
+            <h2 class="section-title reveal">Product Showcase</h2>
             <p class="section-subtitle reveal">
-              Click any page to open a smooth, zoomable lightbox. Use ← → or swipe to navigate.
+              A selection of our popular items. Visit our catalog for the full collection.
             </p>
           </div>
-          <div class="actions reveal" style="flex-wrap: wrap; gap: 8px;">
-            <button class="chip is-active" data-filter="all">All</button>
-            <button class="chip" data-filter="double-ply">Double Ply Textiles 双层毯</button>
-            <button class="chip" data-filter="sherpa">Sherpa Textiles 舒棉绒毯</button>
-            <button class="chip" data-filter="flannel">Flannel Textiles 法兰绒毯</button>
-            <button class="chip" data-filter="coral-fleece">Coral Fleece Textiles 珊瑚绒毯</button>
-            <button class="chip" data-filter="digital-printing">Digital Printing Textiles 数码毯</button>
-            <button class="chip" data-filter="polar-fleece">Polar Fleece Textiles 摇粒绒毯</button>
-            <button class="chip" data-filter="fleece">Fleece Textiles 双面绒毯</button>
-            <button class="chip" data-filter="picnic">Picnic Textiles 野餐垫</button>
-            <button class="chip" data-filter="others">Others 其他</button>
+          <div class="actions reveal">
+            <a class="btn btn-primary" href="products.html">View Full Catalog</a>
           </div>
         </div>
 
-        <div class="grid" id="grid" aria-label="Catalog gallery"></div>
+        <!-- Add data-limit to limit items on homepage -->
+        <div class="grid" id="grid" aria-label="Product Showcase" data-limit="8"></div>
+
+        <div style="text-align: center; margin-top: 40px;" class="reveal">
+          <a class="btn btn-ghost" href="products.html">Browse All Products →</a>
+        </div>
       </div>
     </section>
 

@@ -1,22 +1,59 @@
 (() => {
   const gallery = Array.isArray(window.__GALLERY__) ? window.__GALLERY__ : [];
   const grid = document.getElementById('grid');
+  const searchInput = document.getElementById('search-input');
+
+  // State for filters
+  let activeFilters = new Set(['all']);
+  let searchTerm = '';
+
+  const getCategoryLabel = (cat) => {
+    return 'Blanket';
+  };
 
   const classify = (item) => {
     return item.category || 'others';
   };
 
-  const getCategoryLabel = (cat) => {
-    // Optional: Map short keys to nicer labels for the badge, or just return the key
-    // For now, let's just capitalize/format or return a generic "Product"
-    // or return the category name if it's short enough.
-    // Given the long names, maybe just "Blanket"?
-    return 'Blanket';
+  // Check if an item matches current filters
+  const matchesFilter = (item) => {
+    // 1. Search Check
+    if (searchTerm) {
+      const lowerTitle = (item.title || '').toLowerCase();
+      if (!lowerTitle.includes(searchTerm)) {
+        return false;
+      }
+    }
+
+    // 2. Category Check
+    if (activeFilters.has('all')) return true;
+    const cat = classify(item);
+    return activeFilters.has(cat);
   };
 
   const buildTiles = (items) => {
+    if (!grid) return;
     grid.innerHTML = '';
-    items.forEach((item, idx) => {
+
+    // Check for data-limit attribute (for Homepage Showcase)
+    const limit = grid.dataset.limit ? parseInt(grid.dataset.limit, 10) : null;
+    let displayItems = items;
+
+    if (limit && limit > 0) {
+      displayItems = items.slice(0, limit);
+    }
+
+    // If empty
+    if (displayItems.length === 0) {
+      grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No products found matching your criteria.</div>';
+      return;
+    }
+
+    displayItems.forEach((item, idx) => {
+      // Find original index in full gallery for lightbox to work correctly with full list?
+      // Actually, for lightbox, we usually want to scroll through the *filtered* list.
+      // So let's pass the 'displayItems' to the lightbox, but we need to know WHICH item index in 'displayItems' was clicked.
+
       const type = classify(item);
       const el = document.createElement('button');
       el.className = 'tile reveal';
@@ -26,19 +63,25 @@
 
       el.innerHTML = `
         <span class="badge">${getCategoryLabel(type)}</span>
-        <img src="${item.src}" alt="${item.title || 'Catalog page'}" loading="lazy" />
+        <img src="${item.src}" alt="${item.title || 'Product'}" loading="lazy" />
         <div class="meta">
-          <strong>${item.title || 'Page'}</strong>
+          <strong>${item.title || 'Product'}</strong>
           <span>Click to view</span>
         </div>
       `;
 
-      el.addEventListener('click', () => openLightbox(items, idx));
+      // Pass the CURRENT filtered list to the lightbox
+      el.addEventListener('click', () => openLightbox(displayItems, idx));
       grid.appendChild(el);
     });
 
     // hook new tiles into reveal observer
     revealObserve();
+  };
+
+  const updateGrid = () => {
+    const filtered = gallery.filter(matchesFilter);
+    buildTiles(filtered);
   };
 
   // ----- Lightbox -----
@@ -48,13 +91,15 @@
   const dl = document.getElementById('download');
   const zoomBtn = document.getElementById('zoom');
 
-  let currentList = gallery;
+  let currentList = [];
   let currentIndex = 0;
 
   const setImage = (list, index) => {
     currentList = list;
     currentIndex = (index + list.length) % list.length;
     const item = list[currentIndex];
+
+    if (!item) return;
 
     lbImg.classList.remove('is-zoom');
     lbImg.src = item.src;
@@ -79,47 +124,87 @@
   const prev = () => setImage(currentList, currentIndex - 1);
   const next = () => setImage(currentList, currentIndex + 1);
 
-  lb.addEventListener('click', (e) => {
-    const t = e.target;
-    if (t && t.hasAttribute && t.hasAttribute('data-close')) closeLightbox();
-  });
-  document.querySelector('[data-prev]')?.addEventListener('click', prev);
-  document.querySelector('[data-next]')?.addEventListener('click', next);
+  if (lb) {
+    lb.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.hasAttribute && t.hasAttribute('data-close')) closeLightbox();
+    });
+    document.querySelector('[data-prev]')?.addEventListener('click', prev);
+    document.querySelector('[data-next]')?.addEventListener('click', next);
 
-  zoomBtn?.addEventListener('click', () => lbImg.classList.toggle('is-zoom'));
-  lbImg?.addEventListener('click', () => lbImg.classList.toggle('is-zoom'));
+    zoomBtn?.addEventListener('click', () => lbImg.classList.toggle('is-zoom'));
+    lbImg?.addEventListener('click', () => lbImg.classList.toggle('is-zoom'));
 
-  document.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('is-open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prev();
-    if (e.key === 'ArrowRight') next();
-  });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
 
-  // touch swipe
-  let x0 = null;
-  lbImg.addEventListener('touchstart', (e) => {
-    x0 = e.touches?.[0]?.clientX ?? null;
-  }, { passive: true });
-  lbImg.addEventListener('touchend', (e) => {
-    const x1 = e.changedTouches?.[0]?.clientX ?? null;
-    if (x0 == null || x1 == null) return;
-    const dx = x1 - x0;
-    if (Math.abs(dx) > 40) (dx > 0 ? prev : next)();
-    x0 = null;
-  }, { passive: true });
+    // touch swipe
+    let x0 = null;
+    lbImg.addEventListener('touchstart', (e) => {
+      x0 = e.touches?.[0]?.clientX ?? null;
+    }, { passive: true });
+    lbImg.addEventListener('touchend', (e) => {
+      const x1 = e.changedTouches?.[0]?.clientX ?? null;
+      if (x0 == null || x1 == null) return;
+      const dx = x1 - x0;
+      if (Math.abs(dx) > 40) (dx > 0 ? prev : next)();
+      x0 = null;
+    }, { passive: true });
+  }
 
-  // ----- Filters -----
+  // ----- Filters (Multi-select) -----
   const chips = Array.from(document.querySelectorAll('.chip'));
-  const applyFilter = (mode) => {
-    chips.forEach(c => c.classList.toggle('is-active', c.dataset.filter === mode));
-    let items = gallery;
-    if (mode !== 'all') {
-      items = gallery.filter(g => classify(g) === mode);
+
+  const handleFilterClick = (clickedChip) => {
+    const filter = clickedChip.dataset.filter;
+
+    if (filter === 'all') {
+      // If "All" is clicked, clear others and set All
+      activeFilters.clear();
+      activeFilters.add('all');
+    } else {
+      // If specific category is clicked
+      activeFilters.delete('all'); // Remove 'all' first
+
+      if (activeFilters.has(filter)) {
+        activeFilters.delete(filter);
+      } else {
+        activeFilters.add(filter);
+      }
+
+      // If nothing left, revert to All
+      if (activeFilters.size === 0) {
+        activeFilters.add('all');
+      }
     }
-    buildTiles(items);
+
+    // Update UI classes
+    updateFilterUI();
+    // Update Grid
+    updateGrid();
   };
-  chips.forEach(c => c.addEventListener('click', () => applyFilter(c.dataset.filter)));
+
+  const updateFilterUI = () => {
+    chips.forEach(c => {
+      const f = c.dataset.filter;
+      const isActive = activeFilters.has(f);
+      c.classList.toggle('is-active', isActive);
+    });
+  };
+
+  chips.forEach(c => c.addEventListener('click', () => handleFilterClick(c)));
+
+  // ----- Search -----
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchTerm = e.target.value.toLowerCase().trim();
+      updateGrid();
+    });
+  }
 
   // ----- Reveal animations -----
   let io;
@@ -137,21 +222,25 @@
   // ----- Mobile nav -----
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.nav-toggle');
-  toggle?.addEventListener('click', () => {
-    const open = header.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
-    header.classList.remove('is-open');
-    toggle?.setAttribute('aria-expanded', 'false');
-  }));
+  if (toggle && header) {
+    toggle.addEventListener('click', () => {
+      const open = header.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
+      header.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+  }
 
   // footer year
-  document.getElementById('year').textContent = String(new Date().getFullYear());
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   // init
-  buildTiles(gallery);
+  buildTiles(gallery); // Initial build with full gallery
   revealObserve();
+
   // ----- Copy to clipboard (Robust) -----
   const copyText = (text, btn) => {
     const originalIcon = btn.innerHTML;
@@ -177,32 +266,26 @@
   const fallbackCopy = (text, btn, onSuccess) => {
     const textArea = document.createElement("textarea");
     textArea.value = text;
-
-    // Avoid scrolling to bottom
     textArea.style.top = "0";
     textArea.style.left = "0";
     textArea.style.position = "fixed";
     textArea.style.opacity = "0";
-
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-
     try {
       const successful = document.execCommand('copy');
       if (successful) onSuccess();
-      else console.error('Fallback copy unsuccessful');
     } catch (err) {
       console.error('Fallback copy failed', err);
     }
-
     document.body.removeChild(textArea);
   };
 
   document.querySelectorAll('.btn-copy').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      e.stopPropagation(); // Stop bubbling
+      e.stopPropagation();
       const textToCopy = btn.getAttribute('data-copy');
       if (textToCopy) copyText(textToCopy, btn);
     });
