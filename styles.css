@@ -1077,6 +1077,7 @@ img {
   margin-top: 2px;
   font-weight: 500;
 }
+
 /* ---------- Filter Sidebar Layout ---------- */
 .product-layout {
   display: flex;
@@ -1094,12 +1095,10 @@ img {
   padding: 24px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.filter-card {
-  
-}
+.filter-card {}
 
 .filter-title {
   font-family: var(--font-display);
@@ -1113,7 +1112,7 @@ img {
   width: 100%;
   padding: 12px 16px;
   border-radius: 12px;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   font-family: var(--font-body);
   font-size: 14px;
   transition: all 0.2s;
@@ -1155,7 +1154,7 @@ img {
   .product-layout {
     flex-direction: column;
   }
-  
+
   .filters-sidebar {
     width: 100%;
   }

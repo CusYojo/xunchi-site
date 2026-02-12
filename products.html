@@ -88,23 +88,65 @@
                 style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
             </div>
 
-            <!-- Filters -->
-            <div class="actions" style="flex-wrap: wrap; gap: 8px;">
-              <button class="chip is-active" data-filter="all">All</button>
-              <button class="chip" data-filter="double-ply">Double Ply Textiles 双层毯</button>
-              <button class="chip" data-filter="sherpa">Sherpa Textiles 舒棉绒毯</button>
-              <button class="chip" data-filter="flannel">Flannel Textiles 法兰绒毯</button>
-              <button class="chip" data-filter="coral-fleece">Coral Fleece Textiles 珊瑚绒毯</button>
-              <button class="chip" data-filter="digital-printing">Digital Printing Textiles 数码毯</button>
-              <button class="chip" data-filter="polar-fleece">Polar Fleece Textiles 摇粒绒毯</button>
-              <button class="chip" data-filter="fleece">Fleece Textiles 双面绒毯</button>
-              <button class="chip" data-filter="picnic">Picnic Textiles 野餐垫</button>
-              <button class="chip" data-filter="others">Others 其他</button>
+            <!-- Year Filters -->
+            <div style="margin-bottom: 16px;">
+              <label
+                style="display: block; font-size: 14px; color: var(--text-light); margin-bottom: 8px; font-weight: 600;">Year</label>
+              <div class="actions" id="year-filters" style="flex-wrap: wrap; gap: 8px; justify-content: flex-start;">
+                <button class="chip is-active" data-year="all">All Years</button>
+                <button class="chip" data-year="2025">2025</button>
+                <button class="chip" data-year="2024">2024</button>
+                <button class="chip" data-year="2023">2023</button>
+                <button class="chip" data-year="2022">2022</button>
+                <button class="chip" data-year="2021">2021</button>
+                <button class="chip" data-year="2020">2020</button>
+              </div>
+            </div>
+
+            <!-- Category Filters -->
+            <div>
+              <label
+                style="display: block; font-size: 14px; color: var(--text-light); margin-bottom: 8px; font-weight: 600;">Category</label>
+              <div class="actions" id="category-filters"
+                style="flex-wrap: wrap; gap: 8px; justify-content: flex-start;">
+                <button class="chip is-active" data-filter="all">All Categories</button>
+                <button class="chip" data-filter="double-ply">Double Ply Blanket 双层毯</button>
+                <button class="chip" data-filter="sherpa">Sherpa Blanket 舒棉绒毯</button>
+                <button class="chip" data-filter="flannel">Flannel Blanket 法兰绒毯</button>
+                <button class="chip" data-filter="coral-fleece">Coral Fleece Blanket 珊瑚绒毯</button>
+                <button class="chip" data-filter="polar-fleece">Polar Fleece Blanket 摇粒绒毯</button>
+                <button class="chip" data-filter="fleece">Fleece Blanket 双面绒毯</button>
+                <button class="chip" data-filter="digital-printing">Digital Print Blanket 数码毯</button>
+                <button class="chip" data-filter="picnic">Picnic Mat 野餐垫</button>
+                <button class="chip" data-filter="jacquard-sherpa">Jacquard Sherpa Blanket 提花羊羔绒</button>
+                <button class="chip" data-filter="jacquard-polar-fleece">Jacquard Polar Fleece Blanket 提花摇粒绒</button>
+                <button class="chip" data-filter="bubble-fleece">Bubble Fleece Blanket 泡泡绒</button>
+                <button class="chip" data-filter="glow-in-the-dark">Glow-in-the-ark Blanket 夜光/发光毯</button>
+                <button class="chip" data-filter="composite-blanket">Composite Blanket 复合毯</button>
+                <button class="chip" data-filter="tv-blanket">TV Blanket 电视毯</button>
+                <button class="chip" data-filter="sewn-blanket">Sewn Blanket 缝制毯</button>
+                <button class="chip" data-filter="bath-towel">Bath Towel 浴巾</button>
+                <button class="chip" data-filter="face-mask">Face Mask 口罩</button>
+                <button class="chip" data-filter="apron">Apron 围裙</button>
+                <button class="chip" data-filter="cushion">Cushion 靠垫</button>
+                <button class="chip" data-filter="shawl">Shawl 披肩</button>
+                <button class="chip" data-filter="others">Others 其他</button>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="grid" id="grid" aria-label="Catalog gallery"></div>
+
+        <!-- Catalog Footer Note -->
+        <div class="reveal"
+          style="text-align: center; margin-top: 60px; padding: 40px; background: rgba(255,255,255,0.5); border-radius: 24px;">
+          <p style="font-size: 1.1rem; color: var(--text-light); max-width: 600px; margin: 0 auto 24px;">
+            Due to copyright protection, some of our latest and exclusive designs are not showcased online.
+            Please contact us to obtain our full product catalog and information.
+          </p>
+          <a href="#contact" class="btn btn-primary">Contact Us for More</a>
+        </div>
       </div>
     </section>
 
