@@ -36,6 +36,24 @@
     return CATEGORY_NAMES[cat] || cat.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   };
 
+  const getDisplayTitle = (item) => {
+    const rawTitle = (item.title || '').trim();
+    const genericFileName = /\.(jpg|jpeg|png|webp)$/i.test(rawTitle) || /^dsc[_-]?\d+/i.test(rawTitle);
+    const categoryLabel = getCategoryLabel(classify(item));
+
+    if (!rawTitle || genericFileName) {
+      return item.year ? `${categoryLabel} Collection ${item.year}` : categoryLabel;
+    }
+
+    return rawTitle;
+  };
+
+  const getDisplayAlt = (item) => {
+    const categoryLabel = getCategoryLabel(classify(item));
+    const yearLabel = item.year ? ` ${item.year}` : '';
+    return `${categoryLabel}${yearLabel} by Xunchi Textiles`;
+  };
+
   const classify = (item) => {
     return item.category || 'others';
   };
@@ -44,8 +62,13 @@
   const matchesFilter = (item) => {
     // 1. Search Check
     if (searchTerm) {
-      const lowerTitle = (item.title || '').toLowerCase();
-      if (!lowerTitle.includes(searchTerm)) {
+      const haystack = [
+        getDisplayTitle(item),
+        getCategoryLabel(classify(item)),
+        item.title || ''
+      ].join(' ').toLowerCase();
+
+      if (!haystack.includes(searchTerm)) {
         return false;
       }
     }
@@ -90,6 +113,7 @@
       // So let's pass the 'displayItems' to the lightbox, but we need to know WHICH item index in 'displayItems' was clicked.
 
       const type = classify(item);
+      const displayTitle = getDisplayTitle(item);
       const el = document.createElement('button');
       el.className = 'tile reveal';
       el.type = 'button';
@@ -98,9 +122,9 @@
 
       el.innerHTML = `
         <span class="badge">${getCategoryLabel(type)}</span>
-        <img src="${item.src}" alt="${item.title || 'Product'}" loading="lazy" />
+        <img src="${item.src}" alt="${getDisplayAlt(item)}" loading="lazy" />
         <div class="meta">
-          <strong>${item.title || 'Product'}</strong>
+          <strong>${displayTitle}</strong>
           <span>${item.year || ''}</span>
         </div>
       `;
@@ -172,8 +196,13 @@
       // Get all items matching CURRENT CATEGORY (ignore year for a moment)
       const categoryMatches = gallery.filter(item => {
         if (searchTerm) {
-          const lowerTitle = (item.title || '').toLowerCase();
-          if (!lowerTitle.includes(searchTerm)) return false;
+          const haystack = [
+            getDisplayTitle(item),
+            getCategoryLabel(classify(item)),
+            item.title || ''
+          ].join(' ').toLowerCase();
+
+          if (!haystack.includes(searchTerm)) return false;
         }
         if (activeFilters.has('all')) return true;
         return activeFilters.has(item.category || 'others');
@@ -215,8 +244,13 @@
     const filtered = gallery.filter(item => {
       // Search
       if (searchTerm) {
-        const lowerTitle = (item.title || '').toLowerCase();
-        if (!lowerTitle.includes(searchTerm)) return false;
+        const haystack = [
+          getDisplayTitle(item),
+          getCategoryLabel(classify(item)),
+          item.title || ''
+        ].join(' ').toLowerCase();
+
+        if (!haystack.includes(searchTerm)) return false;
       }
 
       // Year (Effective)
@@ -252,8 +286,8 @@
 
     lbImg.classList.remove('is-zoom');
     lbImg.src = item.src;
-    lbImg.alt = item.title || 'Image';
-    lbCap.textContent = item.title || '';
+    lbImg.alt = getDisplayAlt(item);
+    lbCap.textContent = getDisplayTitle(item);
     dl.href = item.src;
   };
 
