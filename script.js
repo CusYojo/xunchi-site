@@ -2,6 +2,7 @@
   const gallery = Array.isArray(window.__GALLERY__) ? window.__GALLERY__ : [];
   const grid = document.getElementById('grid');
   const searchInput = document.getElementById('search-input');
+  const THUMB_BASE_PATH = 'assets/img/product-thumbs/';
 
   // State for filters
   let activeFilters = new Set(['all']);
@@ -56,6 +57,23 @@
 
   const classify = (item) => {
     return item.category || 'others';
+  };
+
+  const getThumbnailSrc = (item) => {
+    if (!item?.src) return '';
+    if (item.thumb) return item.thumb;
+
+    const remoteMatch = item.src.match(/\/img\/products\/(.+?)\.(?:jpe?g|png|webp)$/i);
+    if (remoteMatch) {
+      return `${THUMB_BASE_PATH}${remoteMatch[1]}.jpg`;
+    }
+
+    const localMatch = item.src.match(/assets\/img\/products\/(.+?)\.(?:jpe?g|png|webp)$/i);
+    if (localMatch) {
+      return `${THUMB_BASE_PATH}${localMatch[1]}.jpg`;
+    }
+
+    return item.src;
   };
 
   // Check if an item matches current filters
@@ -114,6 +132,7 @@
 
       const type = classify(item);
       const displayTitle = getDisplayTitle(item);
+      const thumbSrc = getThumbnailSrc(item);
       const el = document.createElement('button');
       el.className = 'tile reveal';
       el.type = 'button';
@@ -122,12 +141,19 @@
 
       el.innerHTML = `
         <span class="badge">${getCategoryLabel(type)}</span>
-        <img src="${item.src}" alt="${getDisplayAlt(item)}" loading="lazy" />
+        <img src="${thumbSrc}" alt="${getDisplayAlt(item)}" loading="lazy" decoding="async" />
         <div class="meta">
           <strong>${displayTitle}</strong>
           <span>${item.year || ''}</span>
         </div>
       `;
+
+      const tileImg = el.querySelector('img');
+      if (tileImg && thumbSrc !== item.src) {
+        tileImg.addEventListener('error', () => {
+          tileImg.src = item.src;
+        }, { once: true });
+      }
 
       // Pass the CURRENT filtered list to the lightbox
       el.addEventListener('click', () => openLightbox(displayItems, idx));
@@ -276,6 +302,7 @@
 
   let currentList = [];
   let currentIndex = 0;
+  let lightboxRequestId = 0;
 
   const setImage = (list, index) => {
     currentList = list;
@@ -284,11 +311,34 @@
 
     if (!item) return;
 
+    lightboxRequestId += 1;
+    const requestId = lightboxRequestId;
+    const thumbSrc = getThumbnailSrc(item);
+
     lbImg.classList.remove('is-zoom');
-    lbImg.src = item.src;
     lbImg.alt = getDisplayAlt(item);
     lbCap.textContent = getDisplayTitle(item);
     dl.href = item.src;
+
+    if (thumbSrc && thumbSrc !== item.src) {
+      lbImg.src = thumbSrc;
+      const fullImage = new Image();
+      fullImage.decoding = 'async';
+      fullImage.onload = () => {
+        if (requestId === lightboxRequestId) {
+          lbImg.src = item.src;
+        }
+      };
+      fullImage.onerror = () => {
+        if (requestId === lightboxRequestId) {
+          lbImg.src = item.src;
+        }
+      };
+      fullImage.src = item.src;
+      return;
+    }
+
+    lbImg.src = item.src;
   };
 
   const openLightbox = (list, index) => {
